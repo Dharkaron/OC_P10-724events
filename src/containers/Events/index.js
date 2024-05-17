@@ -16,10 +16,16 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Réorganisation des événements par date décroissante
+  const organizedData = data?.events.sort((evtA, evtB) =>
+  new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+)
+
+  // ajout d'un filtre pour afficher les événements en fonction du type séléctionné
   const filteredEvents = (
     (!type
-      ? data?.events
-      : data?.events )|| []
+      ? organizedData
+      : organizedData.filter((event) => event.type === type) )|| []
   ).filter((event, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&

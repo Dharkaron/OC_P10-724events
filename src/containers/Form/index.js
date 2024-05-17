@@ -4,10 +4,13 @@ import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
-const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 1000); })
+// La fonction "findbytext" du fichier test à un timeout de 1000ms par défaut. 
+// Il faut donc modifier le setTimeout du code pour qu'il finisse avant le test
+const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); })
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
+
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
@@ -16,6 +19,8 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        // Ajout du "onSuccess()" manquant, pour afficher la modale de confirmation, quand le timeout est fini.
+        onSuccess()
       } catch (err) {
         setSending(false);
         onError(err);
@@ -23,6 +28,7 @@ const Form = ({ onSuccess, onError }) => {
     },
     [onSuccess, onError]
   );
+
   return (
     <form onSubmit={sendContact}>
       <div className="row">

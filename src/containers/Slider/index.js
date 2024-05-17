@@ -8,16 +8,15 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
+  const byDateDesc = data?.focus ? data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  );
+  ) : []
 
   // Changement de la logique pour setIndex (array.length => array.length -1)
-  // Changement du timeOut de 5000ms à 10000ms 
   const nextCard = () => {
     setTimeout(
       () => setIndex(index < byDateDesc.length -1 ? index + 1 : 0),
-      10000
+      5000
     );
   };
 
@@ -25,14 +24,14 @@ const Slider = () => {
     nextCard();
   });
   
-  // Possible changement de la pagination au clic des boutons radio => changement nécessaire dans le code
 
+// séparation des deux fonctions "map".
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        
           <div
-            key={event.id} // changement de la clé (event.title) pour avoir une clé unique à chaque événement
+            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -46,20 +45,21 @@ const Slider = () => {
               </div>
             </div>
           </div>
+      ))}
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {byDateDesc?.map((event, radioIdx) => (
                 <input
-                  key={event.id}
+                  key={event.title} // changement de la clé (`${event.id}`)
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // changement de l'index de référence (idx === radioIdx)
+                  readOnly 
                 />
               ))}
             </div>
           </div>
-        </>
-      ))}
+
     </div>
   );
 };

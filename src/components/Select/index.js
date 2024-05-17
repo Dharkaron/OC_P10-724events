@@ -15,11 +15,21 @@ const Select = ({
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
+
+  // Changement dans la fonction (onchange() sans paramètre, setCollapsed() mauvais paramètre)
   const changeValue = (newValue) => {
-    onChange();
+
+    // la fonction onChange nous permet de gérer l'affichage dans la galerie des événements.
+    // On défini donc la nouvelle valeur à appliquer (ligne 58 du composant Events)
+    onChange(newValue);
+
+    // On met à jour la valeur locale
     setValue(newValue);
-    setCollapsed(newValue);
+
+    // on referme le menu déroulant après le choix de la valeur
+    setCollapsed(true);
   };
+  
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
