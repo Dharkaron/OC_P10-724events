@@ -8,5 +8,6 @@ Debugging an event agency's website, using Unit and Fonctional tests
 - Npm or Yarn
 
 <hr>
- ## Starting the app
- - npm start
+
+## Starting the app
+- npm start
