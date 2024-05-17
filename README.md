@@ -1,15 +1,12 @@
-# 724 Events
+# OpenClassrooms - Project 10 - 724 Events
 
 ## Description
-L'application est le site d'une agence evenementielle.
-## Pre-requis
-- NodeJS  >= v16.14.1
+Debugging an event agency's website, using Unit and Fonctional tests
 
-## Installation
-- `yarn install`
+## Prerequisites
+- NodeJS
+- Npm or Yarn
 
-## Lancement de l'application
-- `yarn start`
-
-## Tests
-- `yarn test`
+<hr>
+ ## Starting the app
+ - npm start
